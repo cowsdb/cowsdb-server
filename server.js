@@ -33,7 +33,7 @@ const app = new Elysia()
                 body = false
           }
           if (query.database)
-                chdb_query("USE "+query.database")
+                chdb_query("USE "+query.database)
           if (!query.query) throw new Error('no query, no party.')
           if (!query.format) query.format = query.default_format || 'CSV';
           let result = chdb_query(query.query.toString(), query.format.toString());
