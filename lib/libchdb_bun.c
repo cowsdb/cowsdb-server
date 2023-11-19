@@ -35,7 +35,7 @@ char *Execute(char *query, char *format) {
 }
 
 char *ExecuteSession(char *query, char *format, char *path) {
-    char *argv[] = {(char *)"clickhouse", (char *)"--multiquery", (char *)"--output-format=CSV", (char *)"--query=", (char *)"--path=."};
+    char *argv[] = {(char *)"clickhouse", (char *)"--multiquery", (char *)"--output-format=CSV", (char *)"--query=", (char *)"--path=.chdb_data"};
     char dataFormat[100];
     char dataPath[100];
     char *localQuery;
