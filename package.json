@@ -1,0 +1,21 @@
+{
+  "name": "chdb-bun-server",
+  "version": "1.0.0",
+  "module": "server.js",
+  "type": "module",
+  "author": "Lorenzo Mangani <lorenzo.mangani@gmail.com>",
+  "license": "Apache2.0",
+  "scripts": {
+    "build": "cd lib && gcc -shared -fPIC -o libchdb_bun.so libchdb_bun.c -lchdb",
+    "dev": "bun run server.js"
+  },
+  "devDependencies": {
+    "bun-types": "^0.5.0"
+  },
+  "directories": {
+    "lib": "lib"
+  },
+  "dependencies": {
+    "elysia": "^0.7.29"
+  }
+}
