@@ -44,7 +44,7 @@ const app = new Elysia()
 	  }
 
           if (query.database)
-                chdb_query("USE "+query.database.toString())
+                chdb_query(("USE "+query.database).toString(), query.format.toString(), path)
 
           let result = chdb_query(query.query.toString(), query.format.toString(), path);
           return result.toString();
@@ -52,10 +52,13 @@ const app = new Elysia()
         .post("/", ({ body, query, basicAuth }) => {
 
           if (!query.query && body) {
-                query.query = body.trim()
+                query.query = body
+		query.query = query.query.split('\n').join(' ').trim()
                 body = false
           } else if (query.query && body) {
-		Bun.write(STDIN, body);
+		// Bun.write(STDIN, body);
+		body = body.split('\n').join('').trim()
+		query.query = query.query + ` ${body}`
 	  }
 
           if (!query.query && !body) throw new Error('no query, no party.')
@@ -66,7 +69,7 @@ const app = new Elysia()
               path = DATAPATH + basicAuth.token
 	  }
           if (query.database)
-                chdb_query("USE "+query.database.toString())
+                chdb_query(("USE "+query.database).toString(), query.format.toString(), path)
 
           let result = chdb_query(query.query ? query.query.toString() : '', query.format.toString(), path);
           return result.toString()
