@@ -45,7 +45,7 @@ let controller = {
 // Params: query, format, path
 const dbworker = await Bun.spawn(["bun", "run", "childb.ts"], {
   ipc(message, childProc) {
-    console.log('received from dbworker', message)
+    // console.log('received from dbworker', message)
     controller.receive(message)
   },
   stderr: "pipe",
