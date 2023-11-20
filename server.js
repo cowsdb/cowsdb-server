@@ -55,6 +55,7 @@ const dbworker = await Bun.spawn(["bun", "run", "childb.ts"], {
 
 
 const chdb_query = async function(query, format, path, worker){
+    let result = {};
     if (path && worker) {
         dbworker.send({ query: query, format: format, path: path })
         result = await new Response(dbworker.stdout).text();
