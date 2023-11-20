@@ -1,6 +1,6 @@
 {
   "name": "chdb-bun-server",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "module": "server.js",
   "type": "module",
   "author": "Lorenzo Mangani <lorenzo.mangani@gmail.com>",
@@ -17,7 +17,6 @@
   },
   "dependencies": {
     "elysia": "^0.7.29",
-    "minimatch": "^9.0.3",
-    "mock-stdin": "^1.0.0"
+    "minimatch": "^9.0.3"
   }
 }
