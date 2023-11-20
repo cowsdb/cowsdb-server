@@ -59,7 +59,8 @@ const chdb_query = async function(query, format, path, worker){
     if (path && worker) {
         dbworker.send({ query: query, format: format, path: path })
         result = await new Response(dbworker.stdout).text();
-        return result;
+        const err = await new Response(dbworker.stderr).text();
+        return err ? err : result;
     } else if (path) {
         result = conn.session(query, format, path);
     } else { result = conn.query(query, format); }
