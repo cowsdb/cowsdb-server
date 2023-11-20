@@ -1,6 +1,6 @@
 {
   "name": "chdb-bun-server",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "module": "server.js",
   "type": "module",
   "author": "Lorenzo Mangani <lorenzo.mangani@gmail.com>",
