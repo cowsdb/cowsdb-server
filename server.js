@@ -21,7 +21,7 @@ let controller = {
         receive: function (message) {
             let query = this.findQuery(message.id)
             if (!query) return null
-            query.callback(JSON.stringify(message))
+            query.callback(message.data)
         },
         query: function (query, format, path, worker) {
             if (path && worker) {
