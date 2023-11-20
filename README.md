@@ -10,9 +10,35 @@ Experimental [chDB](https://github.com/auxten/chdb) API server powered by [bun r
 - requires [`libchdb`](https://github.com/metrico/libchdb) on the system
 - requires `gcc` to rebuild
 
-#### Build binding
-```bash
+
+### Usage
+#### Bun
+```
 bun install
 bun run build
 bun dev
+```
+
+#### Bun in Docker
+
+```
+docker pull ghcr.io/lmangani/chdb-bun-server:latest
+```
+
+```
+version: '2.1'
+
+volumes:
+    clickhouse_data: {}
+
+services:
+  chdb-server:
+    image: ghcr.io/chdb-io/chdb-server:latest
+    container_name: chdb-server
+    restart: unless-stopped
+    expose:
+      - 8123
+    volumes:
+      - clickhouse_data:/app/.chdb_data
+
 ```
