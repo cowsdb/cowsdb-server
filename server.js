@@ -5,8 +5,9 @@ import { basicAuth } from './auth.ts';
 
 let PORT = process.env.PORT || 8123
 let HOST = process.env.HOST || '0.0.0.0'
+let DATAPATH = process.env.DATA || '.chdb_data/'
+
 let STDIN = `/proc/${process.pid}/fd/0`
-let DATAPATH = '/tmp/'
 
 let conn = new db('CSV', '/tmp/')
 let version = conn.query("SELECT chdb()") || '0.0.0';

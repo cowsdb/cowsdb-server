@@ -12,5 +12,7 @@ WORKDIR /app
 RUN bun run build
 RUN bun install
 
+RUN mkdir -p .chdb_data
+
 EXPOSE 8123
 CMD [ "bun", "run", "server.js" ]
