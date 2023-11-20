@@ -1,4 +1,6 @@
-/* chdb-server bun powered */
+/* chdb-server bun powered clickhouse API   */
+/* (C) 2023 QXIP BV see LICENSE for details */
+
 import { db, chdb } from "./chdb.js";
 import { Elysia, t } from "elysia";
 import { basicAuth } from './auth.ts';
@@ -6,8 +8,6 @@ import { basicAuth } from './auth.ts';
 let PORT = process.env.PORT || 8123
 let HOST = process.env.HOST || '0.0.0.0'
 let DATAPATH = process.env.DATA || '.chdb_data/'
-
-let STDIN = `/proc/${process.pid}/fd/0`
 
 let conn = new db('CSV', '/tmp/')
 let version = conn.query("SELECT chdb()") || '0.0.0';
@@ -105,15 +105,14 @@ const app = new Elysia()
                 query.query = query.query.split('\n').join(' ').trim()
                 body = false
           } else if (query.query && body) {
-                // dbworker.stdin.write(body);
-                // dbworker.stdin.flush();
+                // TODO: replace with stdin pipe for binary support
                 body = body.split('\n').join('').trim()
                 query.query = query.query + ` ${body}`
           }
 
           if (!query.query && !body) throw new Error('no query, no party.')
           if (!query.format) query.format = query.default_format || 'CSV';
-          if (!query.worker) query.worker = false;
+          if (!query.worker) query.worker = true;
 
           let path = false;
           if(basicAuth?.token){
@@ -130,4 +129,4 @@ const app = new Elysia()
         .post('/mirror', ({ body }) => body)
         .listen({ port: PORT, hostname: HOST })
 
-console.log(`chdb-bun ${version}HTTP API running at ${HOST}:${PORT} and PID ${process.pid}`)
+console.log(`chdb-bun ${version}HTTP API running at ${HOST}:${PORT}`)
