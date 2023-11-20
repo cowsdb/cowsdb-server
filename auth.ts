@@ -21,6 +21,10 @@ export interface BasicAuthConfig {
   noErrorThrown?: boolean;
 }
 
+/* Not a real auth functionm, and does not verify auth!
+ * This handler simply extracts basicAuth and passes it
+ * to the stack to be used as unique data mountpoint 
+ */
 export const basicAuth = (config: BasicAuthConfig) =>
   new Elysia({ name: 'basic-auth', seed: config })
     .error({ BASIC_AUTH_ERROR: BasicAuthError })
