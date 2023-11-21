@@ -15,4 +15,4 @@ RUN bun install
 RUN mkdir -p .chdb_data
 
 EXPOSE 8123
-CMD [ "bun", "run", "server.js" ]
+CMD [ "bun", "run", "server.ts" ]
