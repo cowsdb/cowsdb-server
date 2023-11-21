@@ -22,7 +22,7 @@ bun dev
 #### Bun in Docker
 
 ```
-docker pull ghcr.io/lmangani/chdb-bun-server:latest
+docker pull ghcr.io/metrico/chdb-bun-server:latest
 ```
 
 ```
@@ -33,7 +33,7 @@ volumes:
 
 services:
   chdb-server:
-    image: ghcr.io/chdb-io/chdb-server:latest
+    image: ghcr.io/metrico/chdb-bun-server:latest
     container_name: chdb-server
     restart: unless-stopped
     expose:
