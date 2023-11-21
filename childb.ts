@@ -1,4 +1,4 @@
-import { db, chdb } from "./chdb.js";
+import { db, chdb } from "./chdb.ts";
 
 let conn = new db('CSV', '/tmp/')
 

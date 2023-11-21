@@ -1,4 +1,4 @@
-import { db, chdb } from "./chdb.js";
+import { db, chdb } from "./chdb.ts";
 import { Elysia } from "elysia";
 import { basicAuth } from './auth.ts';
 import QuickLRU from 'quick-lru';
