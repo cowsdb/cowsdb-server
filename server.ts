@@ -25,9 +25,11 @@ const controller = {
       try {
         // const stderr = await dbworker.stderr.getReader().readMany();
 	let decoder = new TextDecoder('utf-8')
-        const stderr = await dbworker.stderr.getReader().read().then(function (result) {
+        const reader = await dbworker.stderr.getReader();
+        const stderr = reader.read().then(function (result) {
            return decoder.decode(Buffer.from(result.value));
         });
+        reader.releaseLock();
 	query.callback(stderr); 
       } catch(e) { console.log(e); }
     }
