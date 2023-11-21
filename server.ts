@@ -89,8 +89,12 @@ const app = new Elysia()
   })
   .get('/version', () => controller.query("SELECT version(), chdb()"))
   .get('/play', () => Bun.file('public/play.html'))
-  .get("/", async ({ query, basicAuth }) => {
-    if (!query.query) throw new Error('no query, no party.');
+  .get("/", async ({ query, basicAuth, set }) => {
+    if (!query.query) { 
+        set.redirect = '/play'
+        return;
+	// throw new Error('no query, no party.');
+    }
     if (!query.format) query.format = query.default_format || 'CSV';
 
     let path = false;
