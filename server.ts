@@ -12,13 +12,25 @@ const version = conn.query("SELECT chdb()") || '0.0.0';
 
 const pendingQueries = new QuickLRU({ maxSize: 100 });
 
+const tmpfd =  "/tmp/.chdb_stderr";
+
 const controller = {
   findQuery(id) {
     return pendingQueries.get(id);
   },
-  receive(message) {
+  async receive(message) {
     const query = this.findQuery(message.id);
     if (!query) return null;
+    if (message?.data.length == 0 ) {
+      try {
+        // const stderr = await dbworker.stderr.getReader().readMany();
+	let decoder = new TextDecoder('utf-8')
+        const stderr = await dbworker.stderr.getReader().read().then(function (result) {
+           return decoder.decode(Buffer.from(result.value));
+        });
+	query.callback(stderr); 
+      } catch(e) { console.log(e); }
+    }
     query.callback(message.data);
   },
   query(query, format, path, worker) {
@@ -39,7 +51,7 @@ const dbworker = await Bun.spawn(["bun", "run", "childb.ts"], {
   ipc(message, childProc) {
     controller.receive(message);
   },
-  stderr: "inherit",
+  stderr: "pipe",
   stdout: "inherit",
   stdin: "pipe",
 });
