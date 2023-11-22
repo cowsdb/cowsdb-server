@@ -34,3 +34,11 @@ jobs:
         push: true
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
+    # Slim Image
+    - uses: kitabisa/docker-slim-action@v1.0.3
+      env:
+        DSLIM_HTTP_PROBE: true
+      with:
+        target: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+        tag: "slim"
+    - run: docker image push "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}" --all-tags
