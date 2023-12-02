@@ -121,7 +121,7 @@ const app = new Elysia()
 
     if (!query.query && !body) throw new Error('no query, no party.');
     if (!query.format) query.format = query.default_format || 'CSV';
-    if (!query.worker) query.worker = true;
+    if (!query.worker) query.worker = false;
 
     let path = false;
     if (basicAuth?.token) {
