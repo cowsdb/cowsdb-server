@@ -1,13 +1,13 @@
-<a href="https://chdb.fly.dev" target="_blank">
-  <img src="https://avatars.githubusercontent.com/u/132536224" width=130 />
+<a href="https://github.com/cowsdb" target="_blank">
+  <img src="https://avatars.githubusercontent.com/u/154673217?s=200&v=4" width=180 />
 </a>
 
-# chdb-bun-server <img src="https://user-images.githubusercontent.com/1423657/236928733-43e4f74e-5cff-4b3f-8bb7-20df58e10829.png" height=20 />
-Experimental [chDB](https://github.com/auxten/chdb) API server powered by [bun runtime](https://bun.sh)
+# cowsdb-server <img src="https://user-images.githubusercontent.com/1423657/236928733-43e4f74e-5cff-4b3f-8bb7-20df58e10829.png" height=20 />
+Experimental [CowsDB/chdb](https://github.com/cowsdb) API server powered by [bun runtime](https://bun.sh)
 ### Status
 
 - experimental, potentially unstable
-- requires [`libchdb`](https://github.com/metrico/libchdb) on the system
+- requires [`libcows`](https://github.com/cowsdb/libcows)
 - requires `gcc` to rebuild
 
 
@@ -22,7 +22,7 @@ bun dev
 #### Bun in Docker
 
 ```
-docker pull ghcr.io/metrico/chdb-bun-server:slim
+docker pull ghcr.io/clowsdb/cowsdb-server:slim
 ```
 
 ```
@@ -33,8 +33,8 @@ volumes:
 
 services:
   chdb-server:
-    image: ghcr.io/metrico/chdb-bun-server:slim
-    container_name: chdb-server
+    image: ghcr.io/cowsdb/cowsdb-server:slim
+    container_name: cowsdb-server
     restart: unless-stopped
     expose:
       - 8123
